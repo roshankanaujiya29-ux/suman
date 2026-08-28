@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Suman Didi 🌸</title>
+<style>
+  :root{ --bg:#0D2622; --blush:#F2B8C6; --gold:#D9A441; --paper:#F6EFE4; }
+  *{box-sizing:border-box; margin:0; padding:0; font-family:sans-serif;}
+  body{
+    background: radial-gradient(ellipse at 50% 0%, rgba(242,184,198,0.15), transparent), var(--bg);
+    color:var(--paper); min-height:100vh; padding: 40px 20px;
+  }
+  .wrap{max-width:500px; margin:0 auto;}
+  header{text-align:center; margin-bottom:40px;}
+  .bloom{width:80px; height:80px; margin:0 auto 15px;}
+  h1{font-size:32px; font-weight:normal; margin-bottom:8px;}
+  h1 em{color:var(--blush); font-style:normal;}
+  .sub{opacity:0.7; font-size:14px; line-height:1.5;}
+  
+  .divider{display:flex; align-items:center; gap:10px; margin:40px 0 20px; font-size:12px; color:var(--blush); letter-spacing:2px; text-transform:uppercase;}
+  .divider::after, .divider::before{content:''; flex:1; height:1px; background:linear-gradient(90deg, transparent, rgba(242,184,198,0.3), transparent);}
+  
+  /* GALLERY RULES */
+  .gallery{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  .frame{
+    aspect-ratio:1; border-radius:12px; position:relative; overflow:hidden;
+    background:rgba(242,184,198,0.05); border:1px dashed rgba(242,184,198,0.3);
+  }
+  
+  /* FIXED: Spans all grid columns and uses an increased 16:9 cinematic aspect ratio */
+  .frame:nth-child(3){
+    grid-column: span 2; 
+    aspect-ratio: 16 / 9;
+  }
+  
+  .frame span{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    font-size:11px; color:var(--blush); opacity:0.6; text-align:center; padding:10px; z-index:1;
+  }
+  .frame img{width:100%; height:100%; object-fit:cover; display:block; position:absolute; z-index:2;}
+
+  .quiz-card{background:rgba(242,184,198,0.05); border:1px solid rgba(242,184,198,0.15); border-radius:16px; padding:20px; margin-bottom:15px;}
+  .quiz-card.hidden{display:none;}
+  .qnum{font-size:11px; color:var(--blush); text-transform:uppercase; margin-bottom:8px; opacity:0.8;}
+  .qtext{font-size:18px; margin-bottom:15px;}
+  .opts{display:flex; flex-direction:column; gap:8px;}
+  .opt{
+    text-align:left; font-size:14px; background:rgba(246,239,228,0.04); 
+    border:1px solid rgba(246,239,228,0.15); color:var(--paper); padding:12px; border-radius:10px; cursor:pointer;
+  }
+  .opt:hover, .opt.chosen{border-color:var(--blush); background:rgba(242,184,198,0.1);}
+  .feedback{font-size:13px; margin-top:12px; color:var(--gold); display:none;}
+  .feedback.show{display:block;}
+  .next-btn{
+    display:none; margin:15px auto 0; font-size:12px; color:#000;
+    background:var(--blush); border:none; padding:8px 20px; border-radius:20px; cursor:pointer;
+  }
+  .next-btn.show{display:block;}
+
+  .final{display:none; text-align:center; padding:30px 10px;}
+  .final.show{display:block;}
+  .final .msg{font-size:20px; margin-bottom:20px; font-style:italic;}
+  .heart-btn{background:transparent; border:1px solid var(--blush); color:var(--blush); padding:10px 24px; border-radius:20px; cursor:pointer;}
+  .heart-btn:hover{background:var(--blush); color:#000;}
+  .heart-response{margin-top:15px; font-size:14px; color:var(--gold); display:none;}
+  .heart-response.show{display:block;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <svg class="bloom" viewBox="0 0 116 116" fill="none">
+      <ellipse cx="58" cy="34" rx="14" ry="20" fill="#F2B8C6" opacity="0.85"/>
+      <ellipse cx="58" cy="34" rx="14" ry="20" fill="#F2B8C6" opacity="0.85" transform="rotate(72 58 58)"/>
+      <ellipse cx="58" cy="34" rx="14" ry="20" fill="#F2B8C6" opacity="0.85" transform="rotate(144 58 58)"/>
+      <ellipse cx="58" cy="34" rx="14" ry="20" fill="#F2B8C6" opacity="0.85" transform="rotate(216 58 58)"/>
+      <ellipse cx="58" cy="34" rx="14" ry="20" fill="#F2B8C6" opacity="0.85" transform="rotate(288 58 58)"/>
+      <circle cx="58" cy="58" r="11" fill="#D9A441"/>
+    </svg>
+    <h1>Happy Rakhi, <em>Suman Didi</em></h1>
+    <p class="sub">Kuch yaadein aur thodi masti — aapke chhote bhai ki taraf se!</p>
+  </header>
+
+  <div class="divider">Pics</div>
+  <div class="gallery">
+    <div class="frame"><img src="x.jpeg"><span>us two 🤝</span></div>
+    <div class="frame"><img src="z.jpeg"><span>from home 🏡</span></div>
+    <div class="frame"><img src="y.png"><span>favorite memory ✨</span></div>
+  </div>
+
+  <div class="divider">Quick Quiz</div>
+
+  <div class="quiz-card" id="q1">
+    <div class="qnum">Q1</div>
+    <div class="qtext">Sabse zyada gossip kiske saath hoti hai?</div>
+    <div class="opts">
+      <button class="opt" data-fb="Obviously! Best gossip partner ever. 🌸">Suman Didi ke saath</button>
+      <button class="opt" data-fb="Haha no, itni deep baatein har kisi se nahi hoti 😄">Colony ki aunties</button>
+      <button class="opt" data-fb="Close, par humari baatein alag hi level hoti hain 😉">Cousins ke group mein</button>
+    </div>
+    <div class="feedback"></div>
+    <button class="next-btn">Next →</button>
+  </div>
+
+  <div class="quiz-card hidden" id="q2">
+    <div class="qnum">Q2</div>
+    <div class="qtext">Rakhi par sabse zyada wait kis cheez ka rehta hai?</div>
+    <div class="opts">
+      <button class="opt" data-fb="Sabse best part, hands down! 💖">Milna aur baatein karna</button>
+      <button class="opt" data-fb="Sacchai upar aa hi gayi! 🎁">Gifts</button>
+      <button class="opt" data-fb="Khaane pe toh pehla haq hai! 🍬">Mithai</button>
+    </div>
+    <div class="feedback"></div>
+    <button class="next-btn">See Message →</button>
+  </div>
+
+  <div class="final" id="final">
+    <div class="msg">"Happy Rakhi Didi! Thank you hamesha saath dene ke liye aur mere saare nakhre jhelne ke liye. You're the best!"</div>
+    <button class="heart-btn">Send Love ❤️</button>
+    <div class="heart-response">Hugs incoming! 🤗✨</div>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.quiz-card').forEach((card, index, cardsArray) => {
+    const opts = card.querySelectorAll('.opt');
+    const feedback = card.querySelector('.feedback');
+    const nextBtn = card.querySelector('.next-btn');
+
+    opts.forEach(opt => {
+      opt.addEventListener('click', () => {
+        opts.forEach(o => o.classList.remove('chosen'));
+        opt.classList.add('chosen');
+        feedback.textContent = opt.getAttribute('data-fb');
+        feedback.classList.add('show');
+        nextBtn.classList.add('show');
+      });
+    });
+
+    nextBtn.addEventListener('click', () => {
+      card.classList.add('hidden');
+      if (index < cardsArray.length - 1) {
+        cardsArray[index + 1].classList.remove('hidden');
+      } else {
+        document.getElementById('final').classList.add('show');
+      }
+    });
+  });
+
+  document.querySelector('.heart-btn').addEventListener('click', function() {
+    document.querySelector('.heart-response').classList.add('show');
+  });
+</script>
+
+</body>
+</html>
